@@ -16,6 +16,7 @@
     "@babel/runtime": "7.5.5",
     "@react-native-community/eslint-config": "0.0.3",
     "babel-jest": "24.8.0",
+    "detox": "^13.3.1",
     "eslint": "6.1.0",
     "jest": "24.8.0",
     "metro-react-native-babel-preset": "0.54.1",
@@ -23,5 +24,17 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/boredApp.app",
+        "build": "xcodebuild -workspace ios/boredApp.xcworkspace -scheme boredApp -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+      }
+    },
+    "runner-config": "e2e/config.json",
+    "test-runner": "jest"
   }
 }
