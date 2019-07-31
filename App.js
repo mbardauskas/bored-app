@@ -9,7 +9,6 @@
 import React, {Fragment, useState} from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   ScrollView,
   View,
   Text,
@@ -45,8 +44,5 @@ const Activity = ({isActivityShown}) => {
 
   return null;
 };
-
-const styles = StyleSheet.create({
-});
 
 export default App;
