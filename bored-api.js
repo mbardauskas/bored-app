@@ -1,13 +1,13 @@
 export class BoredAPI {
-  constructor(injectedFetch) {
+  constructor(injectedFetch = global.fetch) {
     this.fetch = injectedFetch;
   }
 
-  async fetchActivity() {
+  fetchActivity = async () => {
     const response = await this.fetch('http://www.boredapi.com/api/activity/');
     const json = await response.json();
     return json.activity;
   }
 }
 
-export default new BoredAPI(global.fetch);
+export default new BoredAPI();
