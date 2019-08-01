@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import boredApi from './bored-api';
 
-class App extends React.Component {
+class AppScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,7 @@ class App extends React.Component {
   }
 
   boredClicked = async () => {
-    const retrievedActivityText = await boredApi.fetchActivity();
+    const retrievedActivityText = await this.props.fetchActivity();
     this.setState({
       isActivityShown: true,
       activityText: retrievedActivityText,
@@ -63,5 +63,7 @@ const Activity = ({isActivityShown, activityText}) => {
 
   return null;
 };
+
+const App = ({fetchActivity = boredApi.fetchActivity}) => <AppScreen fetchActivity={fetchActivity}/>;
 
 export default App;

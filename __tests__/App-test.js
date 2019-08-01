@@ -1,4 +1,3 @@
-jest.mock('../bored-api');
 import 'react-native';
 import App from '../App';
 import {componentDriver, getTextNodes} from 'react-component-driver';
@@ -8,7 +7,7 @@ describe('Bored app', () => {
   let mockFetchActivity;
 
   beforeEach(() => {
-    mockFetchActivity = require('../bored-api').default.fetchActivity;
+    mockFetchActivity = jest.fn();
     mockFetchActivity.mockReturnValue(Promise.resolve('learn to play banjo'));
     component = driver().setProps({fetchActivity: mockFetchActivity});
   });
