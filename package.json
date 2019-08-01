@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "test": "jest",
+    "test-js": "jest __tests__",
+    "test-e2e": "detox build && detox test",
+    "pretest": "npm run lint",
     "lint": "eslint .",
-    "e2e": "detox build && detox test"
+    "test": "npm run test-js && npm run test-e2e"
   },
   "dependencies": {
     "react": "16.8.6",
