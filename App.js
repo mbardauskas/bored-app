@@ -15,6 +15,7 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
+import boredApi from './bored-api';
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class App extends React.Component {
   }
 
   boredClicked = async () => {
-    const retrievedActivityText = await this.props.fetchActivity();
+    const retrievedActivityText = await boredApi.fetchActivity();
     this.setState({
       isActivityShown: true,
       activityText: retrievedActivityText,
