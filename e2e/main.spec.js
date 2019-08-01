@@ -4,9 +4,21 @@ describe('Main functionality', () => {
   });
 
   it('should allow user to get a random activity on the press of a button', async () => {
-    await expect(element(by.id('ACTIVITY_TEXT'))).toBeNotVisible();
+    const driver = BoredAppDriver();
+    await expect(driver.getActivityElement()).toBeNotVisible();
 
-    await element(by.id('GET_ACTIVITY')).tap();
-    await expect(element(by.id('ACTIVITY_TEXT'))).toBeVisible();
+    await driver.pressImBored();
+    await expect(driver.getActivityElement()).toBeVisible();
   });
 });
+
+const BoredAppDriver = () => {
+  return {
+    getActivityElement() {
+      return element(by.id('ACTIVITY_TEXT'));
+    },
+    async pressImBored() {
+      await element(by.id('GET_ACTIVITY')).tap();
+    },
+  }
+};
