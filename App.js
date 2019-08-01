@@ -6,14 +6,13 @@
  * @flow
  */
 
-import React, {Fragment} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   View,
   Text,
-  StatusBar,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import boredApi from './bored-api';
 
@@ -37,20 +36,17 @@ class AppScreen extends React.Component {
   render() {
     const {activityText, isActivityShown} = this.state;
     return (
-      <View testID="mainScreen">
-        <Fragment>
-          <StatusBar barStyle="dark-content" />
-          <SafeAreaView>
-            <ScrollView contentInsetAdjustmentBehavior="automatic">
-              <View>
-                <TouchableOpacity onPress={this.boredClicked} testID="GET_ACTIVITY">
-                  <View><Text>I'm bored</Text></View>
-                </TouchableOpacity>
-                <Activity activityText={activityText} isActivityShown={isActivityShown}/>
-              </View>
-            </ScrollView>
-          </SafeAreaView>
-        </Fragment>
+      <View testID="mainScreen" style={styles.container}>
+        <SafeAreaView>
+          <View>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={this.boredClicked} testID="GET_ACTIVITY" style={styles.button}>
+                <View><Text style={styles.buttonText}>I'm bored</Text></View>
+              </TouchableOpacity>
+            </View>
+            <Activity activityText={activityText} isActivityShown={isActivityShown}/>
+          </View>
+        </SafeAreaView>
       </View>
     );
   }
@@ -58,11 +54,40 @@ class AppScreen extends React.Component {
 
 const Activity = ({isActivityShown, activityText}) => {
   if (isActivityShown) {
-    return (<View><Text testID="ACTIVITY_TEXT">{activityText}</Text></View>);
+    return (<View style={styles.activity}><Text style={styles.activityText} testID="ACTIVITY_TEXT">{activityText}</Text></View>);
   }
 
   return null;
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#0066cc',
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    borderRadius: 15,
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
+  },
+  activity: {
+    marginTop: 20,
+    marginHorizontal: 50,
+  },
+  activityText: {
+    fontSize: 20,
+  },
+});
 
 const App = ({fetchActivity = boredApi.fetchActivity}) => <AppScreen fetchActivity={fetchActivity}/>;
 
