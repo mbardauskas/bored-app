@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, {Fragment, useState} from 'react';
+import React, {Fragment} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,30 +16,48 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const App = () => {
-  const [isActivityShown, setIsActivityShown] = useState(false);
-  return (
-    <View testID="mainScreen">
-      <Fragment>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-          <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <View>
-              <TouchableOpacity onPress={() => setIsActivityShown(true)} testID="GET_ACTIVITY">
-                <View><Text>I'm bored</Text></View>
-              </TouchableOpacity>
-              <Activity isActivityShown={isActivityShown}/>
-            </View>
-          </ScrollView>
-        </SafeAreaView>
-      </Fragment>
-    </View>
-  );
-};
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isActivityShown: false,
+      activityText: '',
+    };
+  }
 
-const Activity = ({isActivityShown}) => {
+  boredClicked = async () => {
+    const retrievedActivityText = await this.props.fetchActivity();
+    this.setState({
+      isActivityShown: true,
+      activityText: retrievedActivityText,
+    });
+  }
+
+  render() {
+    const {activityText, isActivityShown} = this.state;
+    return (
+      <View testID="mainScreen">
+        <Fragment>
+          <StatusBar barStyle="dark-content" />
+          <SafeAreaView>
+            <ScrollView contentInsetAdjustmentBehavior="automatic">
+              <View>
+                <TouchableOpacity onPress={this.boredClicked} testID="GET_ACTIVITY">
+                  <View><Text>I'm bored</Text></View>
+                </TouchableOpacity>
+                <Activity activityText={activityText} isActivityShown={isActivityShown}/>
+              </View>
+            </ScrollView>
+          </SafeAreaView>
+        </Fragment>
+      </View>
+    );
+  }
+}
+
+const Activity = ({isActivityShown, activityText}) => {
   if (isActivityShown) {
-    return (<View><Text testID="ACTIVITY_TEXT">learn to play banjo</Text></View>);
+    return (<View><Text testID="ACTIVITY_TEXT">{activityText}</Text></View>);
   }
 
   return null;
