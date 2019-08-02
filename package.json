@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
+    "start-fake-server": "node fake-server/index.js",
     "test-js": "jest __tests__",
     "test-e2e": "detox build && detox test",
     "pretest": "npm run lint",
@@ -19,8 +20,10 @@
     "@babel/runtime": "7.5.5",
     "@react-native-community/eslint-config": "0.0.5",
     "babel-jest": "24.8.0",
+    "body-parser": "^1.19.0",
     "detox": "^13.3.1",
     "eslint": "6.1.0",
+    "express": "^4.17.1",
     "jest": "24.8.0",
     "metro-react-native-babel-preset": "0.54.1",
     "react-component-driver": "^0.9.0",
