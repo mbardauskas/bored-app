@@ -4,6 +4,6 @@ describe('Sanity', () => {
   });
 
   it('should show initial screen', async () => {
-    await expect(element(by.id('some-non-existing-id'))).toBeVisible();
+    await expect(element(by.id('MAIN_SCREEN'))).toBeVisible();
   });
 });

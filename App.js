@@ -4,15 +4,26 @@ import {
   View,
   Text,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 
-class App extends React.Component {
+export default api => class App extends React.Component {
+  state = {};
+
+  getActivity = async () => this.setState({activity: await api.fetchActivity()});
+
   render() {
+    const {activity} = this.state;
     return (
-      <View style={styles.container}>
+      <View testID="MAIN_SCREEN" style={styles.container}>
         <SafeAreaView>
           <View>
-            <Text>Hello world!</Text>
+            <TouchableOpacity testID="GET_ACTIVITY_CTA" onPress={this.getActivity}>
+              <Text>I am Bored</Text>
+            </TouchableOpacity>
+            {activity ? <View>
+              <Text testID="ACTIVITY_TEXT">{activity}</Text>
+            </View> : null}
           </View>
         </SafeAreaView>
       </View>
@@ -27,5 +38,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default App;

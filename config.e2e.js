@@ -1,0 +1,1 @@
+export const boredApiUrl = 'http://localhost:5279/activity';
