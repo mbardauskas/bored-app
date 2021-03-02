@@ -32,7 +32,9 @@
   },
   "jest": {
     "preset": "react-native",
-    "modulePathIgnorePatterns": ["<rootDir>/e2e"]
+    "modulePathIgnorePatterns": [
+      "<rootDir>/e2e"
+    ]
   },
   "detox": {
     "configurations": {
